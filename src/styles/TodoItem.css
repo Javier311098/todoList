@@ -1,0 +1,72 @@
+.list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-item {
+  border: 3px solid;
+  border-color: rgb(190, 12, 12);
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.borrada {
+  text-decoration: line-through;
+}
+
+.todo-item p {
+  font-size: 25px;
+  margin: 3px;
+}
+.todo-item b {
+  font-size: 25px;
+  margin: 3px;
+}
+span b {
+  display: flex;
+  justify-content: flex-end;
+  color: rgb(95, 162, 165);
+}
+.activo {
+  border: 3px solid;
+  border-color: rgb(95, 162, 165);
+}
+.todo-item:hover {
+  background-color: rgb(242, 248, 248);
+  cursor: pointer;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.eliminar {
+  width: 30%;
+  margin-top: 5px;
+  height: 30px;
+  font-size: 18px;
+  background-color: rgb(255, 77, 54);
+  color: white;
+}
+
+.eliminar:hover {
+  background-color: rgb(190, 12, 12);
+}
+
+.editar {
+  width: 30%;
+  margin-top: 5px;
+  height: 30px;
+  font-size: 18px;
+  background-color: rgb(204, 191, 7);
+  color: white;
+}
+
+.editar:hover {
+  cursor: pointer;
+  background-color: rgb(177, 165, 5);
+}

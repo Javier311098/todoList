@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.App h1 {
+  font-size: 50px;
+  font-family: sans-serif;
+  color: rgb(47, 141, 144);
+  margin: 0px;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  font-family: "Gill Sans";
+}
