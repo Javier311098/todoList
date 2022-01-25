@@ -16,6 +16,7 @@ export const TodoList = () => {
       const newTodo = {
         id: new Date(),
         todo: inputTodo,
+        fecha: new Date(),
         hecho: false,
       };
       dispatch({
