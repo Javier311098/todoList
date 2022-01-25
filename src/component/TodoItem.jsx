@@ -2,11 +2,9 @@ import React, { useContext } from "react";
 import { TodoContext } from "../helpers/todoContext";
 import { types } from "../helpers/types";
 import "../styles/TodoItem.css";
-
+import moment from "moment";
 export const TodoItem = () => {
   const { todos, dispatch, inputTodo, setInputTodo } = useContext(TodoContext);
-
-  // const options = { year: "numeric", month: "long", day: "numeric" };
 
   const handleDelete = (id) => {
     dispatch({
@@ -48,6 +46,11 @@ export const TodoItem = () => {
           key={todo.id}
         >
           <span>
+            <b>
+              {moment(todo.fecha).format("L") +
+                " " +
+                moment(todo.fecha).format("LT")}
+            </b>
             <b>#{idx + 1}</b>
           </span>
           <p className={`${todo.hecho && "borrada"}`}>
