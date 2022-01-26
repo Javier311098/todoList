@@ -1,12 +1,25 @@
-import React, { useContext, useState } from "react";
-import { TodoContext } from "../helpers/todoContext";
+import React, { useEffect } from "react";
+import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import { changeNameInput, starAddnewTodo } from "../redux/actions/todo";
 
-import { types } from "../helpers/types";
 import "../styles/TodoList.css";
 
 export const TodoList = () => {
-  const { dispatch, inputTodo, setInputTodo } = useContext(TodoContext);
-
+  const dispatch = useDispatch();
+  const { inputTodo, todos, todoSelected } = useSelector(
+    (state) => state.listTodos
+  );
+  const handleInputChange = ({ target }) => {
+    dispatch(changeNameInput(target.value));
+  };
+  useEffect(() => {
+    if (todoSelected) {
+      dispatch(changeNameInput(todoSelected.nombre));
+    } else {
+      dispatch(changeNameInput(""));
+    }
+  }, [dispatch, todoSelected]);
   const agregarTodo = (e) => {
     e.preventDefault();
 
@@ -14,26 +27,21 @@ export const TodoList = () => {
       return;
     } else {
       const newTodo = {
-        id: new Date(),
-        todo: inputTodo,
-        fecha: new Date(),
-        hecho: false,
+        nombre: inputTodo,
+        fecha: moment().toDate(),
+        hecha: false,
       };
-      dispatch({
-        type: types.agregarTodo,
-        payload: newTodo,
-      });
-      setInputTodo("");
+      dispatch(starAddnewTodo(newTodo));
+      dispatch(changeNameInput(""));
     }
-  };
-
-  const handleInputChange = ({ target }) => {
-    setInputTodo(target.value);
   };
 
   return (
     <>
       <form className="form-todo" onSubmit={agregarTodo}>
+        <h1>
+          Pendientes: {todos.filter((todo) => todo.hecha === false).length}
+        </h1>
         <input
           value={inputTodo}
           className="todo-input"

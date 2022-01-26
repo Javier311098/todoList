@@ -1,48 +1,43 @@
-import React, { useContext } from "react";
-import { TodoContext } from "../helpers/todoContext";
-import { types } from "../helpers/types";
 import "../styles/TodoItem.css";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-export const TodoItem = () => {
-  const { todos, dispatch, inputTodo, setInputTodo } = useContext(TodoContext);
+import {
+  startDeletingTodo,
+  startUpdatingTodo,
+  todoSeleccionado,
+  toggleHecha,
+} from "../redux/actions/todo";
 
-  const handleDelete = (id) => {
-    dispatch({
-      type: types.eliminarTodo,
-      payload: id,
-    });
-    setInputTodo("");
+export const TodoItem = () => {
+  const { todos, inputTodo } = useSelector((state) => state.listTodos);
+  const dispatch = useDispatch();
+  const handleDelete = (todo) => {
+    dispatch(startDeletingTodo(todo));
   };
 
-  const handleToogle = (id) => {
-    dispatch({
-      type: types.toogleTodo,
-      payload: id,
-    });
+  const handleCheck = (todo) => {
+    dispatch(toggleHecha(todo.id));
   };
 
   const handleEdit = (todo) => {
     if (inputTodo.length <= 1) {
       return;
     } else {
-      dispatch({
-        type: types.editarTodo,
-        payload: { id: todo.id, todo: inputTodo },
-      });
-      setInputTodo("");
+      const todoActualizado = { ...todo, nombre: inputTodo, hecha: todo.hecha };
+      dispatch(startUpdatingTodo(todoActualizado));
     }
   };
 
-  const handleCurrentValue = (todo) => {
-    setInputTodo(todo.todo);
+  const handleSelectTodo = (todo) => {
+    dispatch(todoSeleccionado(todo));
   };
 
   return (
     <div className="list-container">
       {todos.map((todo, idx) => (
         <div
-          onDoubleClick={() => handleCurrentValue(todo)}
-          className={`todo-item  ${todo.hecho && "activo"}  `}
+          onDoubleClick={() => handleSelectTodo(todo)}
+          className={`todo-item  ${todo.hecha && "activo"}  `}
           key={todo.id}
         >
           <span>
@@ -53,16 +48,16 @@ export const TodoItem = () => {
             </b>
             <b>#{idx + 1}</b>
           </span>
-          <p className={`${todo.hecho && "borrada"}`}>
-            <b> Por hacer:</b> {todo.todo}
+          <p className={`${todo.hecha && "borrada"}`}>
+            <b> Por hacer:</b> {todo.nombre}
           </p>
 
           <b>
             Hecha:
             <input
               type="checkbox"
-              onChange={() => handleToogle(todo.id)}
-              checked={todo.hecho}
+              onChange={() => handleCheck(todo)}
+              checked={todo.hecha}
             />
           </b>
           <div className="buttons-container">
@@ -70,10 +65,7 @@ export const TodoItem = () => {
               Editar
             </button>
 
-            <button
-              className="btn eliminar"
-              onClick={() => handleDelete(todo.id)}
-            >
+            <button className="btn eliminar" onClick={() => handleDelete(todo)}>
               Eliminar
             </button>
           </div>
