@@ -1,0 +1,32 @@
+/* Extra small devices (phones, 400px and down) */
+@media only screen and (max-width: 400px) {
+  .App {
+    flex-direction: column;
+  }
+  .App h1 {
+    font-size: 45px;
+  }
+  .container-app {
+    width: 90vw;
+    height: 90vh;
+  }
+  .todo-input {
+    width: 90%;
+    flex-direction: column;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  .App {
+    flex-direction: column;
+  }
+
+  .container-app {
+    width: 95vw;
+    height: 95vh;
+  }
+  .todo-input {
+    flex-direction: column;
+  }
+}

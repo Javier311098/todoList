@@ -28,3 +28,7 @@
   background-color: rgb(101, 168, 172);
   cursor: pointer;
 }
+
+.error-input {
+  color: red;
+}

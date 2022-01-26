@@ -36,7 +36,7 @@ export const TodoItem = () => {
     <div className="list-container">
       {todos.map((todo, idx) => (
         <div
-          onDoubleClick={() => handleSelectTodo(todo)}
+          onClick={() => handleSelectTodo(todo)}
           className={`todo-item  ${todo.hecha && "activo"}  `}
           key={todo.id}
         >

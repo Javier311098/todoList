@@ -49,6 +49,11 @@ export const TodoList = () => {
           type="text"
           placeholder="Agregar pendiente..."
         />
+        {!inputTodo && (
+          <span className="error-input">
+            *se require al menos dos caracteres
+          </span>
+        )}
         <button className="btn agregar" type="submit">
           Agregar
         </button>
